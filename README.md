@@ -8,8 +8,9 @@ By something useful I mean easy to use rich graph library functionality, with pe
 
 #### Compiling and doing something useful with this project
 Voron.Graph depends on Voron storage, and if you choose to download and compile, you need to:
-* Get [Voron](https://github.com/myarichuk/raven.voron) sources
-* Update references to Voron in the project
+* Get [RavenDB](https://github.com/ayende/ravendb) sources
+* Compile RavenDB
+* Update references to Voron in the project (Voron project is in Raven.Voron folder in RavenDB solution)
 * Compile!
 
 #### Show me the code
