@@ -1,6 +1,6 @@
 ### Voron.Graph
 A lightweight persisted graph library, based on [Voron](https://github.com/ayende/raven.voron/) - a new transactional key value store developed from scratch by [Hibernating Rhinos](http://hibernatingrhinos.com/).<br/>
-*update: Voron project is now in [RavenDB](https://github.com/ayende/ravendb) repository, the repository in [Voron](https://github.com/ayende/raven.voron/) is not being maintained* <br/>
+*update: Voron project is now in [RavenDB](https://github.com/ayende/ravendb) repository, the Raven.Voron repository ([Voron](https://github.com/ayende/raven.voron/)) is not being maintained* <br/>
 It is a pet project - a sandbox to play with graph theory related stuff, and perhaps also make something usefull out of it.</br>
 By something useful I mean easy to use rich graph library functionality, with persisted graph data, and without the need to load entire graph into memory.<br/>
 (with emphasis on *easy to use* :) )
