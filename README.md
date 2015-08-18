@@ -26,16 +26,16 @@ using (var storage = new StorageEnvironment(StorageEnvironmentOptions.CreateMemo
 
   using (var tx = graph.NewTransaction(TransactionFlags.ReadWrite))
   {
-    node1 = graph.Commands.CreateNode(tx, JsonFromValue("test1"));
-    node2 = graph.Commands.CreateNode(tx, JsonFromValue("test2"));
-    node3 = graph.Commands.CreateNode(tx, JsonFromValue("test3"));
+    node1 = graph.CreateNode(tx, JsonFromValue("test1"));
+    node2 = graph.CreateNode(tx, JsonFromValue("test2"));
+    node3 = graph.CreateNode(tx, JsonFromValue("test3"));
 
-    graph.Commands.CreateEdgeBetween(tx, node3, node1);
-    graph.Commands.CreateEdgeBetween(tx, node3, node2);
+    graph.CreateEdgeBetween(tx, node3, node1);
+    graph.CreateEdgeBetween(tx, node3, node2);
 
     //looping edge also ok!
     //adding multiple loops will overwrite each other
-    graph.Commands.CreateEdgeBetween(tx, node2, node2);
+    graph.CreateEdgeBetween(tx, node2, node2);
     
     tx.Commit();
   }
@@ -58,10 +58,10 @@ var graph = new GraphStorage("TestGraph", Env);
 Node node1, node2, node3, node4;
 using (var tx = graph.NewTransaction(TransactionFlags.ReadWrite))
 {
-  node1 = graph.Commands.CreateNode(tx, JsonFromValue(1));
-  node2 = graph.Commands.CreateNode(tx, JsonFromValue(2));
-  node3 = graph.Commands.CreateNode(tx, JsonFromValue(3));
-  node4 = graph.Commands.CreateNode(tx, JsonFromValue(4));
+  node1 = graph.CreateNode(tx, JsonFromValue(1));
+  node2 = graph.CreateNode(tx, JsonFromValue(2));
+  node3 = graph.CreateNode(tx, JsonFromValue(3));
+  node4 = graph.CreateNode(tx, JsonFromValue(4));
 
   node1.ConnectWith(tx, node2, graph, 1);
   node2.ConnectWith(tx, node3, graph, 1);
@@ -74,10 +74,9 @@ using (var tx = graph.NewTransaction(TransactionFlags.ReadWrite))
 
 using (var tx = graph.NewTransaction(TransactionFlags.Read))
 {
-  var shortestPathAlgorithm = new DijkstraShortestPath(tx, graph, node1, cancelTokenSource.Token);
-  var shortestPathsData = shortestPathAlgorithm.Execute();
+  var result = graph.Advanced.ShortestPath.Dijkstra(tx, node1);
 
-  var shortestNodePath = shortestPathsData.GetShortestPathToNode(node4);
+  var shortestNodePath = result.GetShortestPathToNode(node4);
   shortestNodePath.Should().ContainInOrder(node1.Key, node2.Key, node3.Key, node4.Key);
 }
 ```
