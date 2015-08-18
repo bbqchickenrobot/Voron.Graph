@@ -44,7 +44,7 @@ using (var storage = new StorageEnvironment(StorageEnvironmentOptions.CreateMemo
 
   using (var tx = graph.NewTransaction(TransactionFlags.Read))
   {
-    var adjacentNodes = graph.Queries.GetAdjacentOf(tx, node3).ToList();
+    var adjacentNodes = graph.GetAdjacentOf(tx, node3).ToList();
     adjacentNodes.Select(x => x.Key).Should().Contain(new[] { node1.Key, node2.Key });
   }
 }
